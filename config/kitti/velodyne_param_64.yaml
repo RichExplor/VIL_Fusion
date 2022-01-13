@@ -1,0 +1,31 @@
+# Topics
+lidarTolic: "/sensor_fusion_visual_feature/veloCloud"  # /velodyne_points  /points_raw  /kitti/velo/pointcloud /sensor_fusion_visual_feature/veloCloud
+# pose save
+poseSaveTUM: "/home/lenovo/output/KITTI/"
+# poseSaveTUM: "/home/lenovo/output/MVSEC/"
+# poseSaveTUM: "/home/lenovo/output/TaoZi/"
+
+# Sensor Settings
+N_SCAN: 64            # 64, 32, 16
+Horizon_SCAN: 1800
+downsampleRate: 1     # 1, 2
+lidarMinRange: 3.0
+lidarMaxRange: 90.0
+
+# LOAM feature threshold
+edgeThreshold: 0.1
+surfThreshold: 0.1
+
+# voxel filter
+voxelSize: 0.2
+MapLeafSize: 0.4
+EdgeLeafSize: 0.4  # 0.4
+SurfLeafSize: 0.8  # 0.8
+
+# scanContext
+sc_dist_th: 0.2
+sc_max_rad: 80.0
+
+# keyFrames
+keyframe_trans_th: 2.0
+keyframe_rotate_th: 10.0

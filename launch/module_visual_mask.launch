@@ -1,0 +1,32 @@
+<launch>
+    <!-- <arg name="config_path" default = "$(find sensor_fusion)/config/daheng/daheng_config.yaml" /> -->
+    <arg name="config_path" default = "$(find sensor_fusion)/config/iphone/iphone_config.yaml" />
+	<!-- <arg name="config_path" default = "$(find sensor_fusion)/config/kitti/kitti_config.yaml" /> -->
+    <arg name="vins_path" default = "$(find sensor_fusion)/" />
+
+    <node pkg="sensor_fusion" type="sensor_fusion_feature_mask" name="sensor_fusion_feature" output="log">
+        <param name="config_file" type="string" value="$(arg config_path)" />
+        <param name="vins_folder" type="string" value="$(arg vins_path)" />
+    </node>
+
+    <node pkg="sensor_fusion" type="sensor_fusion_eatimator" name="sensor_fusion_eatimator" output="screen">
+       <param name="config_file" type="string" value="$(arg config_path)" />
+       <param name="vins_folder" type="string" value="$(arg vins_path)" />
+    </node>
+
+    <!-- <node pkg="sensor_fusion" type="sensor_fusion_pose_graph" name="sensor_fusion_pose_graph" output="screen">
+        <param name="config_file" type="string" value="$(arg config_path)" />
+        <param name="vins_folder" type="string" value="$(arg vins_path)" />
+        <param name="visualization_shift_x" type="int" value="0" />
+        <param name="visualization_shift_y" type="int" value="0" />
+        <param name="skip_cnt" type="int" value="0" />
+        <param name="skip_dis" type="double" value="0" />
+    </node> -->
+
+    <!-- rviz -->
+    <include file="$(find sensor_fusion)/launch/module_rviz.launch" />
+
+    <!-- Image conversion -->
+    <node pkg="image_transport" type="republish" name="vins_republish" args="compressed in:=/galaxy_camera/image raw out:=/galaxy_camera/image" output="screen" respawn="true"/>
+
+</launch>
