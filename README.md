@@ -1,9 +1,13 @@
-# Sensor_Fusion
+# VIL_Fusion
 ## Multi-sensor fusion SLAM system based on factor graph
 
-**说明：使用视觉-惯性和纯激光里程计，通过因子图后处理全局位姿。其中平移的权重激光比例高，旋转的权重视觉-惯性比例高**
-**其中视觉前端特征点使用激光点云和三角化共同估计深度（添加mask-rcnn剔除动态特征点）, 激光前端采用帧到局部地图的特征最近邻检索匹配，后端优化计算雅克比矩阵，迭代优化，保证构建地图的精度**
+**说明：使用视觉-惯性和纯激光里程计，通过因子图后处理全局位姿。添加激光帧间约束到滑动窗口共同优化联合目标函数**
+
+**其中视觉前端特征点使用激光点云和三角化共同估计深度（添加mask-rcnn剔除动态特征点）, 激光前端采用帧到局部地图的特征最近邻检索匹配，后端优化重新计算帧间约束的雅克比矩阵，迭代优化，保证构建地图的精度**
+
 **传感器类型：大恒工业相机、Xsens惯性传感器、VLP-32激光雷达、松灵机器人底盘**
+
+**在KITTI数据集的07、09序列测试，自己的数据集由于没有进行硬件时间戳校准，因此效果不好**
 
 This work is based on f-loam and VINS-Mono, On this basis, We use the laser point to obtain the depth and factor map and optimize the way to realize the pose estimation.
 
@@ -29,27 +33,22 @@ This code is modified from [F-LOAM](https://github.com/wh200720041/floam) and [V
 ### 3.1 clone build
 ```
     cd ~/catkin_ws/src
-    git clone https://github.com/GuoFeng-X/Sensor_Fusion.git
+    git clone https://github.com/GuoFeng-X/VIL_Fusion.git
     cd ..
     catkin_make -j4
 ```
-### 3.2 run visual inertial
+### 3.2 run visual inertial lidar and loop detect
 ```
     cd catkin_ws
     source devel/setup.bash
-    roslaunch sensor_fusion module_visual.launch
-```
-### 3.3 run fsloam and loop detect
-```
-    cd catkin_ws
-    source devel/setup.bash
-    roslaunch sensor_fusion module_fsloam.launch
+    roslaunch sensor_fusion run_fusion.launch
 ```
 ```
-    rosbag plag kitti_07.bag --pause --clock -r0.5
+    rosbag plag kitti_08.bag --pause --clock -r0.5
 ```
+
 ## 4. KITTI Demo
-Using database KITTI-07 run this code.
+Using database KITTI-08 run this code.
 
 <p align='center'>
 <img width="65%" src="/img/kitti-08-全局轨迹.png"/>

@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/lenovo/catkin_fuse/devel/include/**",
+        "/home/lenovo/catkin_stereo/devel/include/**",
+        "/opt/ros/kinetic/include/**",
+        "/home/lenovo/catkin_fuse/src/A-LOAM/include/**",
+        "/home/lenovo/catkin_fuse/src/VINS-Mono/camera_model/include/**",
+        "/home/lenovo/catkin_stereo/src/VINS-Fusion/camera_models/include/**",
+        "/home/lenovo/catkin_stereo/src/FAST_LIO/include/**",
+        "/home/lenovo/catkin_fuse/src/LIO-SAM/include/**",
+        "/home/lenovo/catkin_wind/src/semantic_slam/include/**",
+        "/home/lenovo/catkin_fuse/src/VIL_Fusion/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
